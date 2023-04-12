@@ -2,7 +2,6 @@
 import SearchCharacter from '@/components/SearchCharacter.vue';
 import { onMounted } from 'vue';
 import { useStoreCharacters } from '@/@Stores/charactersStore';
-
 import Character from '@/components/Character.vue';
 import Loading from '@/components/shared/Loading.vue';
 import Pagination from '@/components/shared/Pagination.vue';
@@ -40,11 +39,11 @@ onMounted(() => {
     </div>
     <div v-if="!storeCharacters.loading">
       <div v-if="storeCharacters.characters && storeCharacters.characters.length">
-        <div class="grid grid-cols-4 gap-4">
+        <div class="flex flex-wrap justify-center">
           <div
             v-for="character in storeCharacters.characters"
             :key="character.id"
-            class="rounded border-4 border-lime-500"
+            class="rounded border-4 border-lime-500 m-4"
           >
             <Character :character="character" />
           </div>
