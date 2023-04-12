@@ -10,11 +10,11 @@ const storeCharacters = useStoreCharacters();
 
 const episodes = computed(() => {
   return storeCharacters.character.episode
-    .map((ep: { match: (arg0: RegExp) => [any, any]; }) => {
+    .map(ep => {
       const [, id] = ep.match(/\/(\d+)$/);
       return +id;
     })
-    .sort((a: number, b: number) => a - b);
+    .sort((a, b) => a - b);
 });
 
 onBeforeMount(() => {
