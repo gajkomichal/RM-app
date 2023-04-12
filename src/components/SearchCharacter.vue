@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { useStoreCharacters } from '@/@Stores/charactersStore';
 
 const storeCharacters = useStoreCharacters();

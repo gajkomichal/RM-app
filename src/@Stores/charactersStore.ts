@@ -11,7 +11,10 @@ export const useStoreCharacters = defineStore('storeCharacters', {
       characters: [] as Character[],
       character: {} as Character,
       favorites: [] as Character[],
-      charactersInfo: {},
+      charactersInfo: {
+        count: 0,
+        pages: 0,
+      },
       loading: false,
       page: 1,
       pageSize: 12,
