@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { computed, onBeforeMount } from 'vue';
 import { useStoreCharacters } from '@/@Stores/charactersStore';
 import { useRoute } from 'vue-router';
