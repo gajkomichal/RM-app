@@ -52,8 +52,9 @@ onMounted(() => {
 
         <Pagination
           :store="storeCharacters"
-          :infos="storeCharacters.charactersInfos"
+          :info="storeCharacters.charactersInfo"
           pageName="Characters"
+          :pageSize="storeCharacters.pageSize"
         />
       </div>
       <p v-else>No characters found.</p>

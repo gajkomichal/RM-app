@@ -26,7 +26,7 @@ onMounted(() => {
         <li
           class="mx-2 inline rounded-lg bg-indigo-500/50 p-2 hover:bg-sky-400 dark:bg-purple-700"
         >
-          Add own character
+          Add your own hero
         </li>
       </RouterLink>
       <RouterLink to="/favorites">

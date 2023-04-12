@@ -11,7 +11,7 @@ export const useStoreCharacters = defineStore('storeCharacters', {
       characters: [] as Character[],
       character: {} as Character,
       favorites: [] as Character[],
-      charactersInfos: {},
+      charactersInfo: {},
       loading: false,
       page: 1,
       pageSize: 12,
@@ -21,13 +21,6 @@ export const useStoreCharacters = defineStore('storeCharacters', {
       filterBy: '',
     };
   },
-  // getters: {
-  //   displayedCharacters(state) {
-  //     const start = (state.page - 1) * state.pageSize;
-  //     const end = start + state.pageSize;
-  //     return state.characters.slice(start, end);
-  //   },
-  // },
   actions: {
     async getAllCharacters(page = 1, search = '', pageSize = 12) {
       this.loading = true;
@@ -38,44 +31,14 @@ export const useStoreCharacters = defineStore('storeCharacters', {
         }
         const response = await axios.get(url);
         const data = response.data;
-        this.characters = data.results.filter(
-          (character: {
-            name: string;
-            status: string;
-            species: string;
-            type: string;
-            gender: string;
-          }) => {
-            if (this.filterBy === 'name') {
-              return character.name
-                .toLowerCase()
-                .includes(search.toLowerCase());
-            } else if (this.filterBy === 'status') {
-              return character.status
-                .toLowerCase()
-                .includes(search.toLowerCase());
-            } else if (this.filterBy === 'species') {
-              return character.species
-                .toLowerCase()
-                .includes(search.toLowerCase());
-            } else if (this.filterBy === 'type') {
-              return character.type
-                .toLowerCase()
-                .includes(search.toLowerCase());
-            } else if (this.filterBy === 'gender') {
-              return character.gender
-                .toLowerCase()
-                .includes(search.toLowerCase());
-            }
-            return true;
-          }
-        );
-        this.charactersInfos = {
+        this.characters = data.results;
+        this.charactersInfo = {
           count: data.info.count,
           pages: data.info.pages,
-          next: data.info.next,
-          prev: data.info.prev,
         };
+        this.page = page;
+        this.pageSize = pageSize;
+        this.defaultDisablePaginationBtns();
       } catch (error) {
         console.error(error);
       } finally {
@@ -100,7 +63,7 @@ export const useStoreCharacters = defineStore('storeCharacters', {
     async handlePages(type: string) {
       if (type === 'prev' && this.page > 1) {
         this.page--;
-      } else if (type === 'next' && this.page < this.charactersInfos.pages) {
+      } else if (type === 'next' && this.page < this.charactersInfo.pages) {
         this.page++;
       }
       this.getAllCharacters(this.page, this.search, this.pageSize);
@@ -112,7 +75,7 @@ export const useStoreCharacters = defineStore('storeCharacters', {
       } else {
         this.disablePrevBtn = false;
       }
-      if (this.page === this.charactersInfos.pages) {
+      if (this.page === this.charactersInfo.pages) {
         this.disableNextBtn = true;
       } else {
         this.disableNextBtn = false;

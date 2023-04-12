@@ -4,7 +4,7 @@ const props = defineProps({
     type: Object,
     required: true,
   },
-  infos: {
+  info: {
     type: Object,
     required: true,
   },
@@ -36,10 +36,10 @@ const props = defineProps({
     </div>
     <div class="pagination-stats is-size-5 flex justify-center ">
       <span class="mr-3">
-        {{ pageName }}: <b>{{ infos.count }}</b>
+        {{ pageName }}: <b>{{ info.count }}</b>
       </span>
       <span>
-        Page <b>{{ store.page }}/{{ infos.pages }}</b>
+        Page <b>{{ store.page }}/{{ info.pages }}</b>
       </span>
     </div>
   </div>
